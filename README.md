@@ -56,4 +56,16 @@ Cajeros activos: 3
 
 Saldo actual: $850
 
+## Punto Crítico
 
+En esta versión del simulador, los tres cajeros (hilos) acceden al mismo saldo global del banco de manera concurrente.  
+Esto genera un **punto crítico**, porque si dos cajeros intentan modificar el saldo al mismo tiempo, el resultado puede ser incorrecto.  
+
+Por ejemplo:
+
+1. Cajero 1 lee saldo = 1000  
+2. Cajero 2 lee saldo = 1000  
+3. Cajero 1 retira 200 → saldo = 800  
+4. Cajero 2 retira 150 → saldo = 850  (en lugar de 650)
+
+En futuras versiones se implementará un **Lock** para asegurar que solo un cajero modifique el saldo a la vez.
