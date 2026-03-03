@@ -15,8 +15,6 @@ Ejecutar:
 Tres cajeros atienden clientes desde una cola compartida.
 
 # Propuesta Técnica
-
-# Problema
 Simular el funcionamiento de un banco donde múltiples cajeros atienden clientes de manera concurrente. El sistema permitirá observar como varios hilos acceden a recursos compartidos, generando posibles condiciones de carrera que luego serán solucionadas mediante mecanismos de sincronización.
 
 # Objetivo General
