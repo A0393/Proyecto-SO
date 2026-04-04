@@ -24,7 +24,7 @@ class Cliente:
         self.id = id_cliente
         self.tipo = tipo
         self.monto = monto
-
+        self.memoria = random.randint(20, 100)
 # -----------------------
 # Programa principal (Commit 1)
 # -----------------------
@@ -48,6 +48,10 @@ if __name__ == "__main__":
     print(f"Clientes en espera: {cola_clientes.qsize()}")
     
     print("Cajeros activos: 3\n")
+    
+def escribir_log(texto):
+    with open("run.log", "a") as f:
+        f.write(texto + "\n")
 
 # -----------------------
 # Función Cajero (Hilo)
@@ -56,7 +60,7 @@ def cajero(id_cajero, banco, cola):
     while not cola.empty():
         cliente = cola.get()
 
-        print(f"[Cajero {id_cajero}] Atendiendo Cliente {cliente.id} - {cliente.tipo} ${cliente.monto}")
+        print(f"[Cajero {id_cajero}] Atendiendo Cliente {cliente.id} - {cliente.tipo} ${cliente.monto} | RAM: {cliente.memoria}MB")
 
         time.sleep(1)  # Simula tiempo de atención
 
@@ -64,6 +68,10 @@ def cajero(id_cajero, banco, cola):
             banco.depositar(cliente.monto)
         else:
             banco.retirar(cliente.monto)
+            
+        log = f"Cajero {id_cajero} atendió Cliente {cliente.id} - {cliente.tipo} ${cliente.monto}"
+        print(log)
+        escribir_log(log)
 
         cola.task_done()
 
