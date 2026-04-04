@@ -60,9 +60,13 @@ def cajero(id_cajero, banco, cola):
     while not cola.empty():
         cliente = cola.get()
 
-        print(f"[Cajero {id_cajero}] Atendiendo Cliente {cliente.id} - {cliente.tipo} ${cliente.monto} | RAM: {cliente.memoria}MB")
+        print(f"[Cajero {id_cajero}] INICIA Cliente {cliente.id}")
+        time.sleep(1)
+        print(f"[Cajero {id_cajero}] TERMINA Cliente {cliente.id}")
 
-        time.sleep(1)  # Simula tiempo de atención
+       
+
+  # Simula tiempo de atención
 
         if cliente.tipo == "deposito":
             banco.depositar(cliente.monto)
