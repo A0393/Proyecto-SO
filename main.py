@@ -2,6 +2,7 @@ import threading
 import queue
 import random
 import time
+self.lock = threading.Lock()
 
 # -----------------------
 # Clase Banco
@@ -10,11 +11,25 @@ class Banco:
     def __init__(self, saldo_inicial):
         self.saldo = saldo_inicial
 
+    #def depositar(self, monto):
+        #self.saldo += monto
+   
     def depositar(self, monto):
-        self.saldo += monto
+    with self.lock:
+        temp = self.saldo
+        time.sleep(0.1)
+        temp += monto
+        self.saldo = temp
 
-    def retirar(self, monto):
-        self.saldo -= monto
+    #def retirar(self, monto):
+        #self.saldo -= monto
+ 
+     def retirar(self, monto):
+    with self.lock:
+        temp = self.saldo
+        time.sleep(0.1)
+        temp -= monto
+        self.saldo = temp
 
 # -----------------------
 # Clase Cliente
