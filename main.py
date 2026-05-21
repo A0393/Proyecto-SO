@@ -12,21 +12,36 @@ import platform
 class Banco:
     def __init__(self, saldo_inicial):
         self.saldo = saldo_inicial
+        
         self.lock = threading.Lock()
 
     def depositar(self, monto):
-        with self.lock:
-            temp = self.saldo
-            time.sleep(0.1)
-            temp += monto
-            self.saldo = temp
+    with self.lock:
+        saldo_anterior = self.saldo
+        time.sleep(0.2)
+        self.saldo += monto
+        print(
+            f"DEPOSITO | Antes:{saldo_anterior} "
+            f"Ahora:{self.saldo}"
+        )
 
-    def retirar(self, monto):
-        with self.lock:
-            temp = self.saldo
-            time.sleep(0.1)
-            temp -= monto
-            self.saldo = temp
+		def retirar(self, monto):
+    with self.lock:
+        saldo_anterior = self.saldo
+        if self.saldo >= monto:
+            time.sleep(0.2)
+            self.saldo -= monto
+            print(
+                f"RETIRO | Antes:{saldo_anterior} "
+                f"Ahora:{self.saldo}"
+            )
+            return True
+        print(
+            f"RECHAZADO "
+            f"Saldo:{self.saldo}"
+        )
+
+        return False
 
 # -----------------------
 # Clase Cliente
