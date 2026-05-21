@@ -144,6 +144,7 @@ def cajero(id_cajero, banco, cola, resultados):
 # -----------------------
 if __name__ == "__main__":
 
+inicio_total = time.time()
     print("--------------------------------------------")
     print("BANCO")
     print("--------------------------------------------")
@@ -164,6 +165,37 @@ if __name__ == "__main__":
         cola_clientes.put(cliente)
 
     print(f"Saldo actual: {banco.saldo}")
+fin_total = time.time()
+
+print("\n===== ESTADISTICAS =====")
+
+print(
+    f"Tiempo total: "
+    f"{fin_total-inicio_total:.2f}s"
+)
+
+print(
+    f"Saldo final: "
+    f"{banco.saldo}"
+)
+
+print(
+    f"Clientes procesados: 5"
+)
+
+print(
+    f"Hilos utilizados: 3"
+)
+
+escribir_log(
+    f"Tiempo total:"
+    f"{fin_total-inicio_total:.2f}s"
+)
+
+escribir_log(
+    f"Saldo final:"
+    f"{banco.saldo}"
+)
     print(f"Clientes en espera: {cola_clientes.qsize()}")
     print("Cajeros activos: 3\n")
     # Crear 3 cajeros
